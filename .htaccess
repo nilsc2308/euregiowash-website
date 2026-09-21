@@ -1,0 +1,57 @@
+# ==========================================================
+#  Euregio Carwash – Serverkonfiguration (Apache)
+#  Passt bei den meisten Hostern (IONOS, Strato, All-Inkl, Hetzner Webhosting).
+#  Läuft der Server mit nginx, wird diese Datei ignoriert – dann bitte
+#  beim Hoster nach dem Gegenstück fragen.
+# ==========================================================
+
+# --- Eigene Fehlerseite -----------------------------------
+ErrorDocument 404 /404.html
+
+# --- Auf HTTPS und www umleiten ---------------------------
+# (Erst aktivieren, wenn das SSL-Zertifikat eingerichtet ist!)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # HTTPS erzwingen
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+  # ohne www -> mit www (bei Bedarf umdrehen)
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteCond %{HTTP_HOST} !^localhost [NC]
+  RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+
+# --- Komprimierung: spart rund 70 % bei Text --------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml application/manifest+json
+</IfModule>
+
+# --- Browser-Zwischenspeicher -----------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                 "access plus 1 hour"
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType font/woff2                "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 6 months"
+  ExpiresByType image/png                 "access plus 6 months"
+  ExpiresByType image/svg+xml             "access plus 6 months"
+  ExpiresByType video/mp4                 "access plus 6 months"
+</IfModule>
+
+# --- Sicherheitskopfzeilen --------------------------------
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# --- Zeichensatz ------------------------------------------
+AddDefaultCharset UTF-8
+AddType font/woff2 .woff2
+
+# --- Verzeichnisauflistung verbieten ----------------------
+Options -Indexes

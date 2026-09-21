@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Euregio Carwash">
+  <defs>
+    <linearGradient id="ecg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a222c"/><stop offset="1" stop-color="#0b0f14"/></linearGradient>
+    <linearGradient id="ect" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7ee2ff"/><stop offset="1" stop-color="#159fdd"/></linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#ecg)"/>
+  <rect x="1" y="1" width="62" height="62" rx="14.2" fill="none" stroke="#2ec5ff" stroke-width="1.4" opacity=".3"/>
+  <path d="M32 12c9 11.2 14.6 18.9 14.6 26a14.6 14.6 0 0 1-29.2 0C17.4 30.9 23 23.2 32 12Z" fill="url(#ect)"/>
+  <path d="M26.4 37.6c0-3.6 1.9-7.2 4.9-10.8-4.8 3.9-8 8.1-8 11.7a9.6 9.6 0 0 0 4.3 8 13.3 13.3 0 0 1-1.2-8.9Z" fill="#0b0f14" opacity=".3"/>
+  <path d="M43.5 15.5l1.7 4.8 4.8 1.7-4.8 1.7-1.7 4.8-1.7-4.8-4.8-1.7 4.8-1.7z" fill="#fff"/>
+</svg>

@@ -1,0 +1,8 @@
+# robots.txt – Euregio Carwash
+# Impressum und Datenschutz tragen ein noindex im Seitenkopf.
+# Sie werden hier bewusst NICHT gesperrt, sonst könnte Google das noindex nicht lesen.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://euregiowash.de/sitemap.xml

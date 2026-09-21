@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" role="img" aria-label="Euregio Carwash">
+  <defs><linearGradient id="vmt" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#7ee2ff"/><stop offset="1" stop-color="#159fdd"/></linearGradient></defs>
+  <path d="M30 6c10.6 13.2 17.2 22.3 17.2 30.7A17.2 17.2 0 0 1 12.8 36.7C12.8 28.3 19.4 19.2 30 6Z" fill="url(#vmt)"/>
+  <path d="M23.4 36.2c0-4.2 2.2-8.5 5.8-12.7-5.7 4.6-9.5 9.6-9.5 13.8a11.3 11.3 0 0 0 5.1 9.4 15.7 15.7 0 0 1-1.4-10.5Z" fill="#0c0f13" opacity=".28"/>
+  <path d="M56 6l1.7 4.8 4.8 1.7-4.8 1.7L56 19l-1.7-4.8-4.8-1.7 4.8-1.7z" fill="currentColor" opacity=".9"/>
+  <text x="76" y="30" font-family="Outfit,system-ui,sans-serif" font-size="20" font-weight="300" fill="currentColor" letter-spacing="3.5">EUREGIO</text>
+  <text x="76" y="53" font-family="Outfit,system-ui,sans-serif" font-size="21" font-weight="800" fill="currentColor" letter-spacing="1.5">CARWASH</text>
+</svg>

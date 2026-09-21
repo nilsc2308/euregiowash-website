@@ -1,0 +1,56 @@
+# ==========================================================
+#  Euregio Carwash – Netlify-Konfiguration
+#  Kein Build-Vorgang: die Dateien werden direkt ausgeliefert.
+#  Das spart Build-Minuten (Freikontingent bleibt unangetastet).
+# ==========================================================
+
+[build]
+  publish = "."
+  command = ""
+
+# --- Sicherheitskopfzeilen für alle Seiten ---------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+
+# --- HTML: kurz zwischenspeichern, aber immer prüfen -----
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# --- Videos: ein Jahr im Browser behalten ---------------
+#     Das ist der wichtigste Hebel gegen Bandbreitenverbrauch:
+#     Wiederkehrende Besucher laden die Videos kein zweites Mal.
+[[headers]]
+  for = "/videos/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/logo/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"
+
+# CSS und JS werden beim Hochladen mit einer Versionsnummer versehen
+# (style.css?v=…), deshalb dürfen sie lange im Browser bleiben:
+# eine neue Version hat eine neue Adresse und wird sofort geladen.
+[[headers]]
+  for = "/style.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+[[headers]]
+  for = "/script.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"

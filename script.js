@@ -5,15 +5,19 @@ const WHATSAPP  = '4915753209427';   // ohne + und ohne führende Null
 
 /* --- Öffnungszeiten: hier anpassen. [von, bis] in Stunden, null = geschlossen --- */
 const ZEITEN = {
-  1: [9, 17],  // Montag
-  2: [9, 17],
-  3: [9, 17],
-  4: [9, 17],
-  5: [9, 17],
-  6: [9, 17],  // Samstag
-  0: null      // Sonntag
+  1: [7.5, 15],  // Montag
+  2: [7.5, 15],
+  3: [7.5, 15],
+  4: [7.5, 15],
+  5: [7.5, 15],
+  6: [9, 16],    // Samstag
+  0: null        // Sonntag
 };
 const TAGE = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+const formatZeit = wert => {
+  const stunde = Math.floor(wert), minute = Math.round((wert - stunde) * 60);
+  return `${String(stunde).padStart(2,'0')}:${String(minute).padStart(2,'0')}`;
+};
 
 const $  = (s, w = document) => w.querySelector(s);
 const $$ = (s, w = document) => [...w.querySelectorAll(s)];
@@ -70,15 +74,15 @@ if (zahl) new IntersectionObserver((es, ob) => es.forEach(e => {
   if (punkt && text) {
     punkt.style.color = offen ? 'var(--wa)' : 'var(--warn)';
     if (offen) {
-      text.textContent = `Jetzt geöffnet – bis ${heute[1]}:00 Uhr`;
+      text.textContent = `Jetzt geöffnet – bis ${formatZeit(heute[1])} Uhr`;
     } else {
       // nächsten geöffneten Tag suchen
       let d = 1, naechster = null;
       while (d <= 7) { const z = ZEITEN[(tag + d) % 7]; if (z) { naechster = {tag:(tag + d) % 7, z}; break; } d++; }
       const heuteSpaeter = heute && std < heute[0];
       text.textContent = heuteSpaeter
-        ? `Geschlossen – heute ab ${heute[0]}:00 Uhr`
-        : naechster ? `Geschlossen – ${TAGE[naechster.tag]} ab ${naechster.z[0]}:00 Uhr` : 'Geschlossen';
+        ? `Geschlossen – heute ab ${formatZeit(heute[0])} Uhr`
+        : naechster ? `Geschlossen – ${TAGE[naechster.tag]} ab ${formatZeit(naechster.z[0])} Uhr` : 'Geschlossen';
     }
   }
 
@@ -87,7 +91,7 @@ if (zahl) new IntersectionObserver((es, ob) => es.forEach(e => {
     [1,2,3,4,5,6,0].forEach(d => {
       const z = ZEITEN[d], tr = document.createElement('tr');
       if (d === tag) tr.className = 'heute';
-      tr.innerHTML = `<td>${TAGE[d]}</td><td>${z ? `${z[0]}:00 – ${z[1]}:00 Uhr` : 'geschlossen'}</td>`;
+      tr.innerHTML = `<td>${TAGE[d]}</td><td>${z ? `${formatZeit(z[0])} – ${formatZeit(z[1])} Uhr` : 'geschlossen'}</td>`;
       tb.appendChild(tr);
     });
   }
